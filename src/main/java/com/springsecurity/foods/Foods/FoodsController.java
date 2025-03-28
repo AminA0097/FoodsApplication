@@ -1,5 +1,6 @@
 package com.springsecurity.foods.Foods;
 
+import com.springsecurity.foods.Bases.Response;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ public class FoodsController {
         this.foodsInterface = foodsInterface;
     }
     @GetMapping("/getfoods")
-    public List<FoodsDto> getFoods() throws Exception {
-        return foodsInterface.findAll(4,0);
+    public Response<FoodsDto> getFoods() throws Exception {
+        return foodsInterface.findAll(5,0);
     }
 }

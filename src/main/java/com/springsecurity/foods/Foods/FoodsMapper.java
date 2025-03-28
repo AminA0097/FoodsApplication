@@ -1,5 +1,6 @@
 package com.springsecurity.foods.Foods;
 
+import com.springsecurity.foods.Bases.Response;
 import jakarta.persistence.Entity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +15,7 @@ import java.util.List;
 public class FoodsMapper {
     private static final Logger log = LoggerFactory.getLogger(FoodsMapper.class);
 
-    public List<FoodsDto> entityToDto(Page<FoodsEntity> entityList) {
+    public Response<FoodsDto> entityToDto(Page<FoodsEntity> entityList) {
         List<FoodsDto> dtoList = new ArrayList<>();
 
         for (FoodsEntity entity : entityList) {
@@ -25,7 +26,7 @@ public class FoodsMapper {
                     try {
                         field.setAccessible(true);
                         Object value = field.get(entity);
-                        if (value.getClass().isAnnotationPresent(Entity.class)) {
+                        if (value!= null && value.getClass().isAnnotationPresent(Entity.class)) {
                             String entityName = value.getClass().getSimpleName();
                             String fieldName = "fld" + entityName.replace("Entity", "Name");
                             try {
@@ -55,7 +56,12 @@ public class FoodsMapper {
 
             dtoList.add(dto);
         }
-
-        return dtoList;
+        Response<FoodsDto > response = new Response<>();
+        response.setContent(dtoList);
+        response.setTotal(entityList.getTotalElements());
+        response.setPageNumber(entityList.getNumber());
+        response.setPageSize(entityList.getSize());
+        response.setTotalPages(entityList.getTotalPages());
+        return response;
     }
 }

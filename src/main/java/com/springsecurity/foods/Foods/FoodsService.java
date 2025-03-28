@@ -1,5 +1,6 @@
 package com.springsecurity.foods.Foods;
 
+import com.springsecurity.foods.Bases.Response;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -26,7 +27,7 @@ public class FoodsService implements FoodsInterface{
     }
 
     @Override
-    public List<FoodsDto> findAll(Integer pageSize,Integer pageNumb) throws Exception {
+    public Response<FoodsDto> findAll(Integer pageSize, Integer pageNumb) throws Exception {
         Pageable pageable = PageRequest.of(pageNumb, pageSize);
         Page<FoodsEntity> foodsEntities = foodsRepo.findAll(pageable);
         return foodsMapper.entityToDto(foodsEntities);
