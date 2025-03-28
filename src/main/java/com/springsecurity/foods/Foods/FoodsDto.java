@@ -16,12 +16,13 @@ public class FoodsDto {
     public void setFldFoodsDesc(String fldFoodsDesc) {
         this.fldFoodsDesc = fldFoodsDesc;
     }
-    private CategoryEntity categoryEntity;
-    public CategoryEntity getCategoryEntity() {
-        return categoryEntity;
+    private String fldCategoryName;
+
+    public String getFldCategoryName() {
+        return fldCategoryName;
     }
 
-    public void setCategoryEntity(CategoryEntity categoryEntity) {
-        this.categoryEntity = categoryEntity;
+    public void setFldCategoryName(String fldCategoryName) {
+        this.fldCategoryName = fldCategoryName;
     }
 }

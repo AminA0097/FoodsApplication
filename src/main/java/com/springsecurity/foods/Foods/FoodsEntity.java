@@ -33,7 +33,7 @@ public class FoodsEntity extends BaseEntity {
     public void setFldFoodsDesc(String fldFoodsDesc) {
         this.fldFoodsDesc = fldFoodsDesc;
     }
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fld_category_id")
     private CategoryEntity categoryEntity;
     public CategoryEntity getCategoryEntity() {
