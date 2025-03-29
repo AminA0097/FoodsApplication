@@ -9,9 +9,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FoodsRepo extends JpaRepository<FoodsEntity,Long> {
-    @Query("select fe from FoodsEntity fe where fe.deleted <> 1")
+    @Query("select fe from FoodsEntity fe where fe.deleted <> true ")
     Page<FoodsEntity> findAll(Pageable pageable);
-    @Query("select fe from FoodsEntity fe where fe.deleted <> 1 and fe.fldFoodsId =?1")
+    @Query("select fe from FoodsEntity fe where fe.deleted <> true and fe.fldFoodsId =?1")
     FoodsEntity findId(Long id);
 
 }

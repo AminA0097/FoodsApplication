@@ -13,14 +13,14 @@ public class FoodsController {
     @PostMapping("/addnew")
     public String addFood(@RequestBody FoodsForm foodsForm)throws Exception{
         foodsInterface.save(foodsForm);
-        return "Successfully added food!";
+        return "Successfully!";
     }
     @GetMapping("/getfoods/{pageNumb}")
     public Response<FoodsDto> getFoods(@PathVariable(name = "pageNumb",required = false)Integer pageNumb ) throws Exception {
         return foodsInterface.findAll(5,pageNumb);
     }
     @PostMapping("/del/{foodid}")
-    public String delFood(@PathVariable("foodid")Long id)throws Exception{
+    public String delFood(@PathVariable(name = "foodid") Long id)throws Exception{
         return foodsInterface.delete(id);
     }
 }
