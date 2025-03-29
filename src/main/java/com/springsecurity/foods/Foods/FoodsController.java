@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("foods/")
 @RestController
+
 public class FoodsController {
     private final FoodsInterface foodsInterface;
     public FoodsController(FoodsInterface foodsInterface) {
@@ -15,8 +16,7 @@ public class FoodsController {
         return "Successfully added food!";
     }
     @GetMapping("/getfoods/{pageNumb}")
-    public String getFoods(@PathVariable("pageNumb")Integer pageNumb ) throws Exception {
-        foodsInterface.findAll(5,pageNumb);
-        return "Foods";
+    public Response<FoodsDto> getFoods(@PathVariable("pageNumb")Integer pageNumb ) throws Exception {
+        return foodsInterface.findAll(5,pageNumb);
     }
 }

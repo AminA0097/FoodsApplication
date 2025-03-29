@@ -21,7 +21,7 @@ public class FoodsMapper {
         List<FoodsDto> dtos = entity.stream().map(FoodsDto::new).collect(Collectors.toList());
         response.setContent(dtos);
         response.setTotal(entity.getTotalElements());
-        response.setPageNumber(entity.getNumber());
+        response.setPageNumber(entity.getNumber() + 1);
         response.setPageSize(entity.getSize());
         response.setTotalPages(entity.getTotalPages());
         return response;

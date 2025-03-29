@@ -1,5 +1,6 @@
 package com.springsecurity.foods.Foods;
 
+import com.springsecurity.foods.Bases.FoodsException;
 import com.springsecurity.foods.Bases.Response;
 import com.springsecurity.foods.Category.CategoryEntity;
 import com.springsecurity.foods.Category.CategoryInterface;
@@ -51,8 +52,11 @@ public class FoodsService implements FoodsInterface{
     }
     @Override
     public Response<FoodsDto> findAll(Integer pageSize, Integer pageNumb) throws Exception {
-        Pageable pageable = PageRequest.of(pageNumb, pageSize);
+        Pageable pageable = PageRequest.of(pageNumb -1, pageSize);
         Page<FoodsEntity> foodsEntities = foodsRepo.findAll(pageable);
+        if(pageNumb > foodsEntities.getTotalPages()){
+            throw new FoodsException("No more pages");
+        }
         return foodsMapper.entityToDto(foodsEntities);
     }
     @Override
