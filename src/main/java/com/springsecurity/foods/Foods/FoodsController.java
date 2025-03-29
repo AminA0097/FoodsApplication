@@ -16,7 +16,11 @@ public class FoodsController {
         return "Successfully added food!";
     }
     @GetMapping("/getfoods/{pageNumb}")
-    public Response<FoodsDto> getFoods(@PathVariable("pageNumb")Integer pageNumb ) throws Exception {
+    public Response<FoodsDto> getFoods(@PathVariable(name = "pageNumb",required = false)Integer pageNumb ) throws Exception {
         return foodsInterface.findAll(5,pageNumb);
+    }
+    @PostMapping("/del/{foodid}")
+    public String delFood(@PathVariable("foodid")Long id)throws Exception{
+        return foodsInterface.delete(id);
     }
 }

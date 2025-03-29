@@ -10,7 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.List;
+
 @Service
 public class FoodsService implements FoodsInterface{
     private final FoodsRepo foodsRepo;
@@ -25,11 +25,11 @@ public class FoodsService implements FoodsInterface{
     public boolean save(FoodsForm foodsForm) throws Exception {
         CategoryEntity categoryEntity = categoryInterface.findCategory(foodsForm.getFoodCategory());
         if(foodsForm.getId() != -1){
-            FoodsEntity foodsEntity = load(foodsForm.getId());
+            FoodsEntity foodsEntity = loadAsEntity(foodsForm.getId());
             foodsEntity.setFldFoodsDesc(foodsForm.getFoodDescription());
             foodsEntity.setFldFoodsName(foodsForm.getFoodName());
             foodsEntity.setCategoryEntity(categoryEntity);
-            foodsEntity.setDeleted(0);
+            foodsEntity.setDeleted(false);
             foodsEntity.setCreated("Amin");
             foodsEntity.setUpdated("Amin");
             foodsEntity.setCreatedDate(new Date());
@@ -41,7 +41,7 @@ public class FoodsService implements FoodsInterface{
             foodsEntity.setCategoryEntity(categoryEntity);
             foodsEntity.setFldFoodsName(foodsForm.getFoodName());
             foodsEntity.setFldFoodsDesc(foodsForm.getFoodDescription());
-            foodsEntity.setDeleted(0);
+            foodsEntity.setDeleted(false);
             foodsEntity.setCreated("Amin");
             foodsEntity.setUpdated("Amin");
             foodsEntity.setCreatedDate(new Date());
@@ -60,8 +60,16 @@ public class FoodsService implements FoodsInterface{
         return foodsMapper.entityToDto(foodsEntities);
     }
     @Override
-    public FoodsEntity load(long id) throws Exception {
+    public FoodsEntity loadAsEntity(Long id) throws Exception {
         return foodsRepo.findId(id);
     }
-
+    @Override
+    public String delete(Long id)throws Exception {
+        FoodsEntity foodsEntity = loadAsEntity(id);
+        foodsEntity.setDeleted(true);
+        foodsEntity.setUpdated("Amin");
+        foodsEntity.setUpdatedDate(new Date());
+        foodsRepo.save(foodsEntity);
+        return "";
+    }
 }

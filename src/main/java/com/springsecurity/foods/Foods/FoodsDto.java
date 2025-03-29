@@ -1,6 +1,8 @@
 package com.springsecurity.foods.Foods;
 import com.springsecurity.foods.Category.CategoryEntity;
+import lombok.Data;
 
+@Data
 public class FoodsDto {
     private String foodName;
     private String foodDescription;

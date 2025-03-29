@@ -1,6 +1,7 @@
 package com.springsecurity.foods.Bases;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.MappedSuperclass;
 
 import java.util.Date;
@@ -11,8 +12,9 @@ public class BaseEntity {
     private String created;
     @Column(name = "updated_by")
     private String updated;
+    @Convert(converter = convertToDatabaseColumn.class)
     @Column(name = "deleted")
-    private Integer deleted;
+    private Boolean deleted;
     @Column(name = "created_date")
     private Date createdDate;
     @Column(name = "updated_date")
@@ -34,11 +36,11 @@ public class BaseEntity {
         this.updated = updated;
     }
 
-    public Integer getDeleted() {
+    public Boolean getDeleted() {
         return deleted;
     }
 
-    public void setDeleted(Integer deleted) {
+    public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
 
