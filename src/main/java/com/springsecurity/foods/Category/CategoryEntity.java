@@ -10,12 +10,12 @@ public class CategoryEntity extends BaseEntity {
     @SequenceGenerator(name = "category_seq", sequenceName = "generic_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "category_seq")
     @Column(name = "fld_category_id")
-    private long fldFoodsId;
-    public long getFldFoodsId() {
-        return fldFoodsId;
+    private long fldCategoryId;
+    public long getFldCategoryId() {
+        return fldCategoryId;
     }
-    public void setFldFoodsId(long fldFoodsId) {
-        this.fldFoodsId = fldFoodsId;
+    public void setFldCategoryId(long fldCategoryId) {
+        this.fldCategoryId = fldCategoryId;
     }
     @Column(name = "fld_Category_Name")
     private String fldCategoryName;
