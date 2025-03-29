@@ -1,5 +1,8 @@
 package com.springsecurity.foods.Category;
 
+import java.util.List;
+
+
 public interface CategoryInterface {
-    CategoryEntity findCategory(Long id)throws Exception;
+    CategoryEntity findCategory(long id)throws Exception;
 }

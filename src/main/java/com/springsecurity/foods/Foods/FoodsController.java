@@ -1,23 +1,26 @@
 package com.springsecurity.foods.Foods;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
-import com.springsecurity.foods.Bases.Response;
-import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
-
-@RequestMapping("Foods/")
-@RestController
-
+@RequestMapping("foods/")
+@Controller
 public class FoodsController {
     private final FoodsInterface foodsInterface;
     public FoodsController(FoodsInterface foodsInterface) {
         this.foodsInterface = foodsInterface;
     }
-    @GetMapping("/getfoods")
-    public Response<FoodsDto> getFoods() throws Exception {
-        return foodsInterface.findAll(5,0);
+    @PostMapping("/post")
+    public String addFood(@RequestBody FoodsForm foodsForm)throws Exception{
+        foodsInterface.save(foodsForm);
+        return "Foods/Foods";
+    }
+    @GetMapping("/getfoods/{pageNumb}")
+    public String getFoods(@PathVariable("pageNumb")Integer pageNumb ) throws Exception {
+        foodsInterface.findAll(5,pageNumb);
+        return "Foods/Foods";
+    }
+    @GetMapping("/addnew")
+    public String addNewFood()throws Exception{
+        return "Foods/Foods";
     }
 }
